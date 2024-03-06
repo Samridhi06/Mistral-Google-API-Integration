@@ -1,0 +1,11 @@
+from langchain.agents import load_tools, initialize_agent, AgentType
+from langchain_community.llms import Ollama
+import os
+
+os.environ["SERPAPI_API_KEY"] ="a640747d8337a791299f10f6d29e2139b155f73c4137a752f35ff5a67c016886"
+llm=Ollama(model="mistral")
+tools = load_tools(["serpapi","llm-math"], llm=llm)
+agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
+
+agent.run("What are new technologies for AI content generation?")
+
